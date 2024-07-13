@@ -17,11 +17,10 @@
 git clone <git url>
 ```
 
+### Step 2: Install dependencies
 ```bash
 cd ThronesApp
 ```
-
-### Step 2: Install dependencies
 ```bash
 npm install
 ```
@@ -32,7 +31,7 @@ Add an Android and/or iOS app to your Firebase project.
 Copy the configurations to the 'FirebaseConfig.js' file and place them in the appropriate directory.
 
 ### Step 4: Configure Firebase
-~ Edit the firebaseConfig.js file with your Firebase project credentials.
+Edit the firebaseConfig.js file with your Firebase project credentials.
 
 ### Step 5: Run the project
 ```bash
