@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { firebase } from '@react-native-firebase/auth';
+import {auth} from '../firebase/firebaseConfig';
 import {TouchableOpacity } from 'react-native';
+import {sendPasswordResetEmail } from 'firebase/auth';
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
 
-  const handlePasswordReset = () => {
+  const handlePasswordReset = async() => {
     if (email === '') {
       Alert.alert('Error', 'Please enter your email address.');
       return;
     }
 
-    firebase.auth().sendPasswordResetEmail(email)
+    await sendPasswordResetEmail(auth, email)
       .then(() => {
         Alert.alert('Success', 'Password reset email sent!');
         navigation.goBack();

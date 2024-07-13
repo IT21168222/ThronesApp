@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { auth } from '../firebase/firebaseConfig';
 import {signInWithEmailAndPassword } from 'firebase/auth';
@@ -8,8 +8,20 @@ export default function SignIn({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    let timer;
+    if (errorMessage) {
+      timer = setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [errorMessage]);
 
   const handleSignIn = async () => {
+    setErrorMessage('');
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -25,18 +37,35 @@ export default function SignIn({navigation}) {
       await AsyncStorage.setItem('loggedInUserId', userUID);
 
       // Navigate to another screen or perform any action after login
-      // For example, you can use navigation.navigate('Home') to navigate to the home screen
-      navigation.navigate('List');
+      navigation.navigate('Home');
 
     } catch (error) {
       console.error('Error logging in:', error);
+      setErrorMessage(getErrorMessage(error.code));
     }
   };
+
+  const errorMessages = {
+    'auth/wrong-password': 'Incorrect password. Please try again.',
+    'auth/invalid-email': 'The email address is not valid.',
+    'auth/user-not-found': 'No user found with this email address.',
+    'auth/missing-password': 'Please enter the password.',
+    'auth/invalid-credential': 'Please check your credentials!.',
+    // Add more mappings as needed
+  };
   
+  const getErrorMessage = (errorCode) => {
+    return errorMessages[errorCode] || 'An error occurred. Please try again later.';
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>My App</Text>
+      {errorMessage ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{errorMessage}</Text>
+        </View>
+      ) : null}
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -145,5 +174,15 @@ const styles = StyleSheet.create({
   signUpLink: {
     color: '#f0a500',
     marginLeft: 5,
+  },
+  errorContainer: {
+    backgroundColor: '#F8D7DA',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+  errorText: {
+    color: '#721C24',
+    textAlign: 'center',
   },
 });

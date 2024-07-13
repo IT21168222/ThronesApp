@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "components/SignUp.jsx", "components/SignIn.tsx", "app/(tabs)/explore.jsx", "components/List.jsx", "app/(tabs)/index.tsx"  ]
+, "components/SignUp.jsx", "components/SignIn.tsx", "app/(tabs)/explore.jsx", "components/CharacterDetails.tsx", "app/(tabs)/index.tsx"  ]
 }

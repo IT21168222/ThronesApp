@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'reac
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
 import { auth, database } from '../firebase/firebaseConfig';
-import { showMessage } from 'react-native-flash-message';
 
 export default function SignUp({navigation}) {
   const [name, setName] = useState('');
@@ -56,17 +55,6 @@ export default function SignUp({navigation}) {
       );
 
       setErrorMessage(''); // Clear any previous error messages
-
-      // showMessage({
-      //   message: 'Registration Successful',
-      //   description: 'You have successfully registered. Please sign in to continue.',
-      //   type: 'success',
-      //   icon: 'success',
-      //   duration: 3000,
-      //   onPress: () => {
-      //     navigation.navigate('SignIn');
-      //   },
-      // });
       
       console.log('User registered successfully!');
     } catch (error) {
