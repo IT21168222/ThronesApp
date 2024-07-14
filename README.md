@@ -1,7 +1,6 @@
 # ThronesApp - Mobile Application
 ## Overview
 ThronesApp is a React Native application designed to provide a seamless and engaging user experience with various integrated features, including Firebase authentication and ThronesAPI integration.
-
 ## Technologies Used:
 - React Native: For building the mobile application.
 - Firebase: For authentication, database, and analytics.
@@ -48,3 +47,6 @@ npx react-native run-android
 # or
 npx react-native run-ios
 ```
+
+## Demo - Screen Recording
+https://drive.google.com/file/d/1FgmHXtxowck08IWAYBIyAGKP8iYLHrYG/view?usp=sharing
